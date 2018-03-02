@@ -1,0 +1,11 @@
+[package]
+name = "rsdparsa-wasm"
+version = "0.1.0"
+authors = ["Nico Grunbaum <na-g@nostrum.com>"]
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+rsdparsa = { git = 'https://github.com/nils-ohlmeier/rsdparsa.git' }
+wasm-bindgen = { git = 'https://github.com/alexcrichton/wasm-bindgen' }
