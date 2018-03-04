@@ -7,5 +7,5 @@ authors = ["Nico Grunbaum <na-g@nostrum.com>"]
 crate-type = ["cdylib"]
 
 [dependencies]
-rsdparsa = { git = 'https://github.com/nils-ohlmeier/rsdparsa.git' }
+rsdparsa = { git = 'https://github.com/nils-ohlmeier/rsdparsa' }
 wasm-bindgen = { git = 'https://github.com/alexcrichton/wasm-bindgen' }
