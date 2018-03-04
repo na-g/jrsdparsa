@@ -6,13 +6,15 @@ use std::fmt;
 use std::rc::Rc;
 
 extern crate rsdparsa;
+use rsdparsa::error::SdpParserError;
+use rsdparsa::SdpSession;
 
 #[wasm_bindgen]
 #[derive(Clone)]
-pub struct JrSdpParserError { error: Rc<rsdparsa::error::SdpParserError> }
+pub struct JrSdpParserError { error: Rc<SdpParserError> }
 
-impl From<rsdparsa::error::SdpParserError> for JrSdpParserError {
-    fn from(error:rsdparsa::error::SdpParserError) -> Self {
+impl From<SdpParserError> for JrSdpParserError {
+    fn from(error:SdpParserError) -> Self {
         JrSdpParserError { error: Rc::new(error) }
     }
 }
@@ -24,14 +26,22 @@ impl fmt::Debug for JrSdpParserError {
 }
 
 #[wasm_bindgen]
-impl JrSdpParserError {}
+impl JrSdpParserError {
+    fn get_line_number(&self) -> String {
+        match *self.error {
+            SdpParserError::Line{ref line_number, ..} => line_number,
+            SdpParserError::Unsupported{ref line_number, ..} => line_number,
+            SdpParserError::Sequence{ref line_number, ..} => line_number,
+        }.to_string()
+    }
+}
 
 #[wasm_bindgen]
 #[derive(Clone)]
-pub struct JrSdpSession { session: Rc<rsdparsa::SdpSession> }
+pub struct JrSdpSession { session: Rc<SdpSession> }
 
-impl From<rsdparsa::SdpSession> for JrSdpSession {
-    fn from(session:rsdparsa::SdpSession) -> Self {
+impl From<SdpSession> for JrSdpSession {
+    fn from(session:SdpSession) -> Self {
         JrSdpSession { session: Rc::new(session) }
     }
 }
@@ -43,15 +53,19 @@ impl fmt::Debug for JrSdpSession {
 }
 
 #[wasm_bindgen]
-impl JrSdpSession {}
+impl JrSdpSession {
+    pub fn version(&self) -> String {
+        return self.session.get_version().to_string()
+    }
+}
 
 #[wasm_bindgen]
 pub struct JrParseResult {
     result: Result<JrSdpSession, JrSdpParserError>
 }
 
-impl From<Result<rsdparsa::SdpSession, rsdparsa::error::SdpParserError>> for JrParseResult {
-    fn from(result:Result<rsdparsa::SdpSession, rsdparsa::error::SdpParserError>) -> Self {
+impl From<Result<SdpSession, SdpParserError>> for JrParseResult {
+    fn from(result:Result<SdpSession, SdpParserError>) -> Self {
         JrParseResult { result: match result {
                 Err(error) => Err(JrSdpParserError::from(error)),
                 Ok(session) => Ok(JrSdpSession::from(session)),
