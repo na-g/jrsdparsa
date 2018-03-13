@@ -1,5 +1,5 @@
 import { JrSdpParsa } from "../target/wasm32-unknown-unknown/release/jrsdparsa";
-import { booted } from "../target/wasm32-unknown-unknown/release/jrsdparsa_wasm";
+import { booted } from "../target/wasm32-unknown-unknown/release/jrsdparsa_bg";
 
 function parse_sdp(){ console.log('ok ...'); };
 console.log("loaded index.js");
