@@ -9,5 +9,5 @@ crate-type = ["cdylib"]
 [dependencies]
 rsdparsa = { git = 'https://github.com/nils-ohlmeier/rsdparsa', features = ['serialize'] }
 wasm-bindgen = { git = 'https://github.com/alexcrichton/wasm-bindgen' }
-serde_json = { version = '1.0.10' }
-serde = { version = '1.0.27' }
+serde_json = { version = '1.0' }
+serde = { version = '1.0' }
