@@ -1,14 +1,12 @@
-#![feature(proc_macro)]
-
 extern crate serde;
 extern crate serde_json;
 extern crate wasm_bindgen;
 use wasm_bindgen::prelude::*;
 use std::fmt;
 
-extern crate rsdparsa;
-use rsdparsa::error::SdpParserError;
-use rsdparsa::SdpSession;
+extern crate webrtc_sdp;
+use webrtc_sdp::error::SdpParserError;
+use webrtc_sdp::SdpSession;
 use serde::ser::Serialize;
 
 trait Jsonable {
@@ -65,7 +63,7 @@ pub struct JrSdpParsa {}
 #[wasm_bindgen]
 impl JrSdpParsa {
     pub fn parse(sdp:&str, fail_on_warning:bool) -> JrParseResult {
-        JrParseResult::from(rsdparsa::parse_sdp(sdp, fail_on_warning))
+        JrParseResult::from(webrtc_sdp::parse_sdp(sdp, fail_on_warning))
     }
 }
 

@@ -1,5 +1,5 @@
 [package]
-name = "jrsdparsa"
+name = "webrtc-sdp-j"
 version = "0.1.0"
 authors = ["Nico Grunbaum <na-g@nostrum.com>"]
 
@@ -7,7 +7,7 @@ authors = ["Nico Grunbaum <na-g@nostrum.com>"]
 crate-type = ["cdylib"]
 
 [dependencies]
-rsdparsa = { git = 'https://github.com/na-g/rsdparsa', branch = 'serde-ize', features = ['serialize'] }
-wasm-bindgen = { git = 'https://github.com/alexcrichton/wasm-bindgen' }
-serde_json = { version = '1.0.10' }
-serde = { version = '1.0.27' }
+webrtc-sdp = { git = 'https://github.com/mozilla/webrtc-sdp', features = ['serialize'] }
+wasm-bindgen = { version = '0.2.79' }
+serde_json = { version = '1.0.79' }
+serde = { version = '1.0.136' }
